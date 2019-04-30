@@ -9,6 +9,8 @@ export class BankComponent implements OnInit {
 
   title = 'Bank';
 
+
+
   constructor() { }
 
   ngOnInit() {

@@ -36,14 +36,15 @@ describe('BankComponent', () => {
 		expect(bank.title).toEqual('Bank');
 	});
 
-  // it('should be able to show an account on the page', () => {
-  //   let account: Account = {
-  //     customerName: 'jon',
-  //     balance: 100
-  //   };
-  //   let accountInfo = element.querySelector
-  //   expect(account).toBeTruthy();
-  // });
+  it('should be able to show an account on the page', () => {
+    let account: Account = {
+      customerName: 'jon',
+      balance: 100
+    };
+    let accountInfo = [account.customerName, account.balance];
+    accountInfo = domElement.querySelector('.accountInfo')
+    expect(accountInfo).toBeTruthy();
+  });
 
 
 });
