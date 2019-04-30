@@ -4,7 +4,7 @@ import { Account} from './../account';
 @Injectable({
   providedIn: 'root'
 })
-export class BalanceService {
+export class BankService {
 
   getBalance(account: Account): number {
     if (this.ValidAccount(account)===true){
@@ -29,13 +29,39 @@ export class BalanceService {
 
   };
 
-  ValidAccount(Account): boolean {
+  ValidAccount(account: Account): boolean {
     if((this.isBalancePositive && this.isNameValid)){
       return true;
     } else {
       throw new Error ('Account isnt valid')
     }
   };
+
+  deposit (): any {
+    let deposit: number = 60;
+  };
+
+  isDepositPositive(amount: number): boolean {
+    if (amount > 0) {
+      return true;
+    } else {
+      throw new Error ('Deposit isnt valid')
+
+    }
+  };
+
+  withdraw (): any {
+    let withdraw: number = 100;
+  };
+
+  isWithdrawalValid(cash: number, account: Account): boolean {
+    if (cash>50 && cash <= account.balance) {
+      return true;
+    } else {
+      throw new Error ('Withdrawal amount isnt valid');
+    }
+  };
+
 
 
   constructor() { }
