@@ -37,8 +37,9 @@ export class BankService {
     }
   };
 
-  deposit (): any {
-    let deposit: number = 60;
+  deposit (depositAmount: number, account: Account): any {
+    account.balance = account.balance + depositAmount;
+    return account.balance;
   };
 
   isDepositPositive(amount: number): boolean {
@@ -50,8 +51,9 @@ export class BankService {
     }
   };
 
-  withdraw (): any {
-    let withdraw: number = 100;
+  withdraw (withdrawalAmount: number, account: Account): any {
+    account.balance = account.balance - withdrawalAmount;
+    return account.balance;
   };
 
   isWithdrawalValid(cash: number, account: Account): boolean {

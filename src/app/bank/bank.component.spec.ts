@@ -46,5 +46,29 @@ describe('BankComponent', () => {
     expect(accountInfo).toBeTruthy();
   });
 
+  it('should use the BankService to show the balance, make a deposit or withdrawal', () => {
+
+    const account: Account = {
+      customerName: 'jon',
+      balance: 100
+    };
+
+    const mockService = jasmine.createSpyObj(['getBalance', 'deposit', 'withdraw']);
+
+    mockService.getBalance.and.returnValue(account.balance);
+    mockService.deposit.and.returnValue(account.balance);
+    mockService.withdraw.and.returnValue(account.balance);
+
+    const component: BankComponent = new BankComponent(mockService);
+
+    component.getBalance();
+    component.deposit(10);
+    component.withdraw(30);    
+
+    expect(mockService.getBalance).toHaveBeenCalled();
+    expect(mockService.deposit).toHaveBeenCalled();
+    expect(mockService.withdraw).toHaveBeenCalled();
+
+  })
 
 });

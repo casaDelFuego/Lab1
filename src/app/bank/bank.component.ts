@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { BankService } from './bank.service';
+import { Account } from './../account';
+
 
 @Component({
   selector: 'app-bank',
@@ -8,12 +11,25 @@ import { Component, OnInit } from '@angular/core';
 export class BankComponent implements OnInit {
 
   title = 'Bank';
+  @Input() account: Account;
 
 
-
-  constructor() { }
+  constructor(private service: BankService) { }
 
   ngOnInit() {
   }
+
+  getBalance(): any {
+    return this.service.getBalance(this.account);
+  };
+
+  deposit(a: number): number {
+    return this.service.deposit(a, this.account);
+  };
+
+  withdraw(a: number): any {
+    return this.service.withdraw(a, this.account);
+  }
+
 
 }
