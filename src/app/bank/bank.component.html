@@ -1,6 +1,8 @@
 <p>
   bank works!
 </p>
-<div class="accountInfo">
-  <!-- {{accountInfo}} -->
-</div>
+<div class="accountInfo">{{account.customerName}}</div>
+<div class="accountBalance">{{getBalance()}}</div>
+<input type="number"/>
+<button class="addDeposit" (click)="deposit()">Add</button>
+<button class="withdraw" (click)="withdraw()">Withdraw</button>

@@ -106,7 +106,7 @@ describe('WithdrawService', () => {
     expect(service.ValidAccount(account)).toBe(true);
   });
 
-  it ('should have amount more oe equal 50 and less or equal the account balance', ()=> {
+  it ('should have amount more or equal 50 and less or equal the account balance', ()=> {
     let account: Account = {
       customerName: 'jon',
       balance: 100

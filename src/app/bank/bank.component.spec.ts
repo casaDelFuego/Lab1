@@ -63,12 +63,38 @@ describe('BankComponent', () => {
 
     component.getBalance();
     component.deposit(10);
-    component.withdraw(30);    
+    component.withdraw(30);
 
     expect(mockService.getBalance).toHaveBeenCalled();
     expect(mockService.deposit).toHaveBeenCalled();
     expect(mockService.withdraw).toHaveBeenCalled();
 
-  })
+  });
+
+  it('should show the balance in the DOM element that has a CSS class accountBalance', () => {
+    let showBalance = domElement.querySelector('.accountBalance').innerText;
+    expect(showBalance).toEqual('1000');
+  });
+ 
+  it('should have an input field where user can write an amount', () => {
+    let input = domElement.querySelector('input');
+    expect(input).toBeTruthy();
+  });
+
+  it('should have a button that runs a function that adds the amount of deposit', () => {
+    let button = domElement.querySelector('.addDeposit');
+    spyOn(component, 'deposit');
+    button.click();
+
+    expect(component.deposit).toHaveBeenCalled();
+  });
+
+  it('should have a button that runs a function that take the amount from account', () => {
+    let button = domElement.querySelector('.withdraw');
+    spyOn(component, 'withdraw');
+    button.click();
+
+    expect(component.withdraw).toHaveBeenCalled();
+  });
 
 });

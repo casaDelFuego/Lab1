@@ -11,7 +11,10 @@ import { Account } from './../account';
 export class BankComponent implements OnInit {
 
   title = 'Bank';
-  @Input() account: Account;
+  @Input() account: Account = {
+    customerName: 'Per Gustavsson',
+    balance: 1000
+  };
 
 
   constructor(private service: BankService) { }
