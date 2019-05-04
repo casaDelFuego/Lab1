@@ -20,7 +20,7 @@ describe('BalanceService', () => {
     expect(service.getBalance).toBeDefined();
   })
 
-   it('should return correct balance', () => {
+   it('should get the balance if account is correct', () => {
      let account: Account = {
        customerName: 'jon',
        balance: 100
@@ -29,6 +29,16 @@ describe('BalanceService', () => {
      let expected = 100
      expect(actual).toBe(expected);
    });
+
+   it ('should throw an error if account isnt valid', ()=> {
+     let account: Account = {
+       customerName: '',
+       balance: 100
+     };
+     let funFunc = () => { service.validAccount(account); }
+     expect(funFunc).toThrow();
+   });
+
 
 });
 
@@ -52,8 +62,12 @@ describe('DepositService', () => {
   });
 
   it ('should throw an error if deposit isnt valid', ()=> {
-     let funFunc = () => { service.isDepositPositive(-1); }
-	   expect(funFunc).toThrow();
+    let account: Account = {
+      customerName: 'jon',
+      balance: 100
+    };
+    let funFunc = () => { service.deposit(-1, account); }
+	  expect(funFunc).toThrow();
   });
 
   it ('should have a valid account', ()=> {
@@ -61,7 +75,7 @@ describe('DepositService', () => {
       customerName: 'jon',
       balance: 100
     };
-    expect(service.ValidAccount(account)).toBe(true);
+    expect(service.validAccount(account)).toBe(true);
   });
 
   it ('should have only positive amount on deposit', ()=> {
@@ -103,7 +117,7 @@ describe('WithdrawService', () => {
       customerName: 'jon',
       balance: 100
     };
-    expect(service.ValidAccount(account)).toBe(true);
+    expect(service.validAccount(account)).toBe(true);
   });
 
   it ('should have amount more or equal 50 and less or equal the account balance', ()=> {

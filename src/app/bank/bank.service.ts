@@ -7,7 +7,7 @@ import { Account} from './../account';
 export class BankService {
 
   getBalance(account: Account): number {
-    if (this.ValidAccount(account)===true){
+    if (this.validAccount(account)===true){
       return account.balance;
     } else {
       throw new Error ('Cannot get the balance, check your account');
@@ -29,8 +29,8 @@ export class BankService {
 
   };
 
-  ValidAccount(account: Account): boolean {
-    if((this.isBalancePositive && this.isNameValid)){
+  validAccount(account: Account): boolean {
+    if((this.isBalancePositive(account.balance) && this.isNameValid(account.customerName))){
       return true;
     } else {
       throw new Error ('Account isnt valid')
@@ -38,6 +38,7 @@ export class BankService {
   };
 
   deposit (depositAmount: number, account: Account): any {
+    this.isDepositPositive(depositAmount);
     account.balance = account.balance + depositAmount;
     return account.balance;
   };
@@ -52,6 +53,7 @@ export class BankService {
   };
 
   withdraw (withdrawalAmount: number, account: Account): any {
+    this.isWithdrawalValid(withdrawalAmount, account);
     account.balance = account.balance - withdrawalAmount;
     return account.balance;
   };
