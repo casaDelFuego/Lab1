@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { BankService } from './bank.service';
 import { Account} from './../account';
 
-describe('BalanceService', () => {
+describe('getBalance', () => {
   let service: BankService;
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -16,7 +16,6 @@ describe('BalanceService', () => {
   });
 
   it ('should have function that returns the balance', ()=> {
-    service.getBalance != undefined;
     expect(service.getBalance).toBeDefined();
   })
 
@@ -30,7 +29,7 @@ describe('BalanceService', () => {
      expect(actual).toBe(expected);
    });
 
-   it ('should throw an error if account isnt valid', ()=> {
+   it ('should throw an error if customer name is not valid', ()=> {
      let account: Account = {
        customerName: '',
        balance: 100
@@ -39,12 +38,29 @@ describe('BalanceService', () => {
      expect(funFunc).toThrow();
    });
 
+   it ('should throw an error if balance is not valid', ()=> {
+     let account: Account = {
+       customerName: 'jon',
+       balance: -10
+     };
+     let funFunc = () => { service.validAccount(account); }
+     expect(funFunc).toThrow();
+   });
+
+   it ('should throw an error if customer name and balance are not valid', ()=> {
+     let account: Account = {
+       customerName: '',
+       balance: -100
+     };
+     let funFunc = () => { service.validAccount(account); }
+     expect(funFunc).toThrow();
+   });
 
 });
 
 
 
-describe('DepositService', () => {
+describe('Deposit', () => {
   let service: BankService;
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -57,16 +73,15 @@ describe('DepositService', () => {
   });
 
   it ('should have a function that handles the deposit', ()=> {
-    service.deposit != undefined;
     expect(service.deposit).toBeDefined();
   });
 
-  it ('should throw an error if deposit isnt valid', ()=> {
+  it ('should throw an error if amount is not valid', ()=> {
     let account: Account = {
       customerName: 'jon',
       balance: 100
     };
-    let funFunc = () => { service.deposit(-1, account); }
+    let funFunc = () => { service.deposit(account, -1); }
 	  expect(funFunc).toThrow();
   });
 
@@ -80,13 +95,13 @@ describe('DepositService', () => {
 
   it ('should have only positive amount on deposit', ()=> {
     let amount = 5;
-    expect(service.isDepositPositive(amount)).toBe(true);
+    expect(5 > 0).toBe(true);
   })
 
 });
 
 
-describe('WithdrawService', () => {
+describe('Withdraw', () => {
   let service: BankService;
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -99,7 +114,6 @@ describe('WithdrawService', () => {
   });
 
   it ('should have a function that handles the withdrawal', ()=> {
-    service.withdraw != undefined;
     expect(service.withdraw).toBeDefined();
   });
 
