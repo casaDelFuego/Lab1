@@ -72,7 +72,7 @@ describe('BankComponent', () => {
     mockService.deposit(account.balance);
     const component: BankComponent = new BankComponent(mockService);
 
-    component.deposit(10);
+    component.deposit(account, 10);
 
     expect(mockService.deposit).toHaveBeenCalled();
 
@@ -89,7 +89,7 @@ describe('BankComponent', () => {
     mockService.withdraw(account.balance);
     const component: BankComponent = new BankComponent(mockService);
 
-    component.withdraw(30);
+    component.withdraw(account, 30);
 
     expect(mockService.withdraw).toHaveBeenCalled();
 

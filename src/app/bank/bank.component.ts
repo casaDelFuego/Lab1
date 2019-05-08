@@ -26,12 +26,12 @@ export class BankComponent implements OnInit {
     return this.service.getBalance(this.account);
   };
 
-  deposit(a: number): number {
-    return this.service.deposit(a, this.account);
+  deposit(account: Account, a: number): void {
+    this.service.deposit(this.account, a);
   };
 
-  withdraw(a: number): any {
-    return this.service.withdraw(a, this.account);
+  withdraw(account: Account, a: number): void {
+    this.service.withdraw(this.account, a);
   }
 
 
