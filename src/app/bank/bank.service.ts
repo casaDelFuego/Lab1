@@ -33,38 +33,28 @@ export class BankService {
     if((this.isBalancePositive(account.balance) && this.isNameValid(account.customerName))){
       return true;
     } else {
-      throw new Error ('Account isnt valid')
+      //throw new Error ('Account is not valid');
+      return false;
     }
   };
 
   deposit (account: Account,depositAmount: number): void {
-    this.isDepositPositive(depositAmount);
+    if (depositAmount>0){
     account.balance = account.balance + depositAmount;
+  } else {
+    throw new Error ('Deposit is not valid')
+  }
   };
 
-  isDepositPositive(amount: number): boolean {
-    if (amount > 0) {
-      return true;
-    } else {
-      throw new Error ('Deposit isnt valid')
-
-    }
-  };
 
   withdraw (account: Account, withdrawalAmount: number): void {
-    this.isWithdrawalValid(withdrawalAmount, account);
-    account.balance = account.balance - withdrawalAmount;
-
-  };
-
-  isWithdrawalValid(cash: number, account: Account): boolean {
-    if (cash>50 && cash <= account.balance) {
-      return true;
+    if (withdrawalAmount>50 && withdrawalAmount <= account.balance){
+      account.balance = account.balance - withdrawalAmount;
     } else {
-      throw new Error ('Withdrawal amount isnt valid');
+      throw new Error ('Withdrawal amount is not valid');
     }
-  };
 
+  };
 
 
   constructor() { }

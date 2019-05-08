@@ -1,4 +1,4 @@
-export interface Services {
+export interface BankService {
   getBalance(account: Account): number;
 	deposit(account: Account, amount: number): void;
 	withdraw(account: Account, amount: number): void;
